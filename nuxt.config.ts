@@ -10,6 +10,16 @@ export default defineNuxtConfig({
     }
   },
 
+  components: [
+    { path: '~/components/ui', prefix: 'Cms' },
+    '~/components'
+  ],
+
+  modules: [
+    '@nuxt/image',
+    'v-wave/nuxt'
+  ],
+
   css: ['@/assets/styles/global.scss'],
 
   vite: {
@@ -17,7 +27,8 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           additionalData:
-            '@use "@/assets/styles/variables.scss" as *;'
+            '@use "@/assets/styles/functions.scss" as *;' +
+              '@use "@/assets/styles/variables.scss" as *;'
         }
       }
     }

@@ -1,0 +1,32 @@
+@import 'normalize.css';
+@import './fonts.scss';
+
+html {
+  font-family: $base-font;
+  font-size: $font-size;
+  color: $base-text-color;
+
+  @media screen and (min-width: $xxl) {
+    font-size: get-vw($font-size);
+  }
+}
+
+html,
+body,
+#__nuxt,
+.page-wrapper {
+  height: 100%;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 28px 0;
+
+  @media screen and (min-width: $xxl) {
+    margin: get-vw(28px) 0;
+  }
+}
