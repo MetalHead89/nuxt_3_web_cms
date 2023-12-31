@@ -17,8 +17,19 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/image',
+    // '@sidebase/nuxt-auth',
     'v-wave/nuxt'
   ],
+
+  // auth: {
+  //   provider: {
+  //     type: 'authjs'
+  //   }
+  // },
+
+  runtimeConfig: {
+    mongodbUri: process.env.MONGODB_URI
+  },
 
   css: ['@/assets/styles/global.scss'],
 
