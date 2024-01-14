@@ -16,19 +16,21 @@ export default defineNuxtConfig({
   ],
 
   modules: [
+    '@pinia/nuxt',
     '@nuxt/image',
-    // '@sidebase/nuxt-auth',
-    'v-wave/nuxt'
+    'v-wave/nuxt',
+    'nuxt-snackbar'
   ],
 
-  // auth: {
-  //   provider: {
-  //     type: 'authjs'
-  //   }
-  // },
+  snackbar: {
+    bottom: true,
+    duration: 5000
+  },
 
   runtimeConfig: {
-    mongodbUri: process.env.MONGODB_URI
+    mongodbUri: process.env.MONGODB_URI,
+    jwtSecret: process.env.JWT_SECRET,
+    passwordSpice: process.env.PASSWORD_SPICE
   },
 
   css: ['@/assets/styles/global.scss'],

@@ -14,6 +14,12 @@ module.exports = {
     'space-before-function-paren': ['error', {
       anonymous: 'never',
       named: 'never'
+    }],
+    'vue/html-self-closing': ['error', {
+      html: {
+        void: 'always'
+      }
     }]
+
   }
 }

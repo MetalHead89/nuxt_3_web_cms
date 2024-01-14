@@ -6,18 +6,26 @@
       </h1>
 
       <form
-        action=""
         class="form"
+        @submit.prevent="handleFormSubmit"
       >
-        <CmsTextInput label="Логин" />
+        <CmsTextInput
+          v-model="form.name"
+          label="Логин"
+        />
 
         <CmsTextInput
+          v-model="form.password"
           type="password"
           label="Пароль"
           autocomplete="new-password"
         />
 
-        <CmsButton class="login-button">
+        <CmsButton
+          type="submit"
+          :is-loading="isSubmit"
+          class="login-button"
+        >
           Войти
         </CmsButton>
       </form>
@@ -26,9 +34,36 @@
 </template>
 
 <script setup lang="ts">
+import { START_PAGE_PATH } from '@/utils/constants'
+const { $api } = useNuxtApp()
+const userStore = useUserStore()
+
+const form = reactive({
+  name: '',
+  password: ''
+})
+
+const isSubmit = ref<boolean>(false)
+
 definePageMeta({
   layout: 'empty'
 })
+
+const handleFormSubmit = () => {
+  setIsSubmit(true)
+
+  $api.auth.login(form)
+    .then(({ token_data: tokenData, user }) => {
+      userStore.setAccessTokenData(tokenData)
+      userStore.setUser(user)
+      navigateTo({ path: START_PAGE_PATH })
+    })
+    .finally(() => { setIsSubmit(false) })
+}
+
+const setIsSubmit = (value: boolean) => {
+  isSubmit.value = value
+}
 </script>
 
 <style lang="scss" scoped>

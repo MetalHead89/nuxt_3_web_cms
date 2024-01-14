@@ -5,6 +5,7 @@
       v-bind="$attrs"
       class="input"
       required
+      @input="handleTextInput"
     />
     <div class="underline" />
     <label class="label">
@@ -14,9 +15,11 @@
 </template>
 
 <script lang="ts" setup>
+const emit = defineEmits(['update:model-value'])
 export interface Props {
   type?: 'text' | 'password',
-  label?: string
+  label?: string,
+  modelValue?: string
 }
 
 defineOptions({
@@ -25,8 +28,13 @@ defineOptions({
 
 withDefaults(defineProps<Props>(), {
   type: 'text',
-  label: ''
+  label: '',
+  modelValue: ''
 })
+
+const handleTextInput = (event: Event) => {
+  emit('update:model-value', (event.target as HTMLInputElement).value)
+}
 </script>
 
 <style lang="scss" scoped>
